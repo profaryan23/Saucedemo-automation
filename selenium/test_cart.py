@@ -1,16 +1,15 @@
-@pytest.fixture(autouse=True)
+class TestCart:
+    """Test cases for shopping cart functionality"""
+    
+    @pytest.fixture(autouse=True)
     def setup_and_teardown(self):
         """Setup and teardown for each test"""
-        # --- ADD THESE LINES TO RUN IN JENKINS WITHOUT CRASHING ---
         options = webdriver.ChromeOptions()
         options.add_argument("--headless=new") 
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         
-        # Pass the options into Chrome
         self.driver = webdriver.Chrome(options=options)
-        # ----------------------------------------------------------
-        
         self.driver.get(Config.BASE_URL)
         self.driver.implicitly_wait(Config.IMPLICIT_WAIT)
         
